@@ -1,0 +1,19 @@
+﻿An Object state is its data defined in instance or static variables. An object state can contain other object references.
+Shared varible- Object's state varible can be accessed by mutiple threads.
+Mutable varible/Object – Its value can be changed during its lifetime.
+
+Thread safety – Protecting object's state varibles (Mutable varibles) from concurrent access(by mutiple threads)
+
+Mutiple threads can coordinate their access to a object's state varible using synchronization. In Java we use Synchronized keyword, Voltile varibles, explict locks, and atomic varibles to provide coordination between threads while they accessinng a object's state varible.
+
+Pre-conditions are the things that must be true before a method is called. The method tells clients "this is what I expect from you".
+Post-conditions are the things that must be true after the method is complete. The method tells clients "this is what I promise to do for you".
+Invariants are the things that are always true and won't change. The method tells clients "if this was true before you called me, I promise it'll still be true when I'm done".
+An  invariant is a condition that can be relied upon to be true during execution of a program, or during some portion of it. It is a logical assertion that is held to always be true during a certain phase of execution. For example, a loop invariant is a condition that is true at the beginning and end of every execution of a loop.
+A loop invariant is a property of a program loop that is true before (and after) each iteration. It is a logical assertion, sometimes checked within the code by an assertion call. Knowing its invariant(s) is essential in understanding the effect of a loop.
+
+We know that a thread can not acquire a monitor which is owned by another thread. A thread own a monitor for the period between the time it acquires the monitor for entering a synchronized method/block and the time when it releases the monitor when the thread either returns from the method (or completes the block) OR throws an uncaught exception.
+
+But, a thread is allowed to acquire a monitor owned by itself. Confused? Why would a thread need to acquire a monitor which it already owns? It heppens when a synchronized code either directly or indirectly invokes a synchronized method/block which requires the same monitor. For example: a recursive synchronized method. Allowing a thread to acquire the monitor it already owns is called Reentrant Synchronization and without which it'll be very difficult to ensure that a thread in Java doesn't block itself.
+
+
