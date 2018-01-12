@@ -1,4 +1,8 @@
-﻿An Object state is its data defined in instance or static variables. An object state can contain other object references.
+﻿
+http://thread-safe.org/index.html
+https://github.com/ThomasKrieger/concurrent-junit
+
+An Object state is its data defined in instance or static variables. An object state can contain other object references.
 Shared varible- Object's state varible can be accessed by mutiple threads.
 Mutable varible/Object – Its value can be changed during its lifetime.
 
