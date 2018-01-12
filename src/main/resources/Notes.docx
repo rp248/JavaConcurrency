@@ -17,3 +17,90 @@ We know that a thread can not acquire a monitor which is owned by another thread
 But, a thread is allowed to acquire a monitor owned by itself. Confused? Why would a thread need to acquire a monitor which it already owns? It heppens when a synchronized code either directly or indirectly invokes a synchronized method/block which requires the same monitor. For example: a recursive synchronized method. Allowing a thread to acquire the monitor it already owns is called Reentrant Synchronization and without which it'll be very difficult to ensure that a thread in Java doesn't block itself.
 
 
+Thread-Safety: Managing access to state (shared or mutable state) of an object. We can define it as protecting object's data from concurrent access.
+Object State: Data stored in instance or static variables. An object state can depend on other objects, that is other objects are defined as variables. We can define an object state as data that can effect or change its behavior. 
+
+Shared variable or state: An object's variable is shared among mutiple threads.
+Mutable variable or state: And object's variable is changes during its life.
+
+When more than one thread accessing an objects state variable, and one of the thread trying to modify the state variable, all the threads must coorinate their 
+access to that variable using synchronization. In Java we use the keyword “Synchronized” to provide coorination between threads. Java also provides “Voltile”, “Locks” and “Atomic variable” to implement synchronization.
+
+
+
+
+If multiple threads accessing an objects mutable state variable, we must consider three cases.
+1. Don't share mutable state variable between threads, do so we can prevent race conditions.
+2. Make the state variable Immutable.
+3. Use Synchronization wherever accessing the state variable.
+
+Encapsulation and data hiding can be used to design thread-safe classes.
+
+When designing thread-safe classes we should consider Encapsulation, immutability and clear specification of Invariants.
+
+Invariant : A Class invariant should always be true. Invariant is used in method's pre, post conditions.
+
+Class Specification: Define class invariants, which maintains class state, and use these invariants in post conditions. 
+
+Example : 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Stateless Class:
+
+
+
+    StatelessFactorizer has no instance variables or references to other 
+objects, so we can say its thread-safe class. The transient state for the factorial computation exists in local variables, that are stored in executing thread stack. In this case required local variables can be accessed by only executing thread not by other threads.
+
+Stateless objects are always thread safe.
+
+Class with State:
+Example:
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+In the above example, ++count statement is not atomic, which means the statement execution is not single. ++count will execute as three statements by the runtime.
+1. Fetch current value from count variable
+2. Add new value to the current value
+3. Write the new value back to the count variable
+++count is read-modify-write operation, in which the resulting state is derived from the previous state.
+
+For instance two threads are accessing the above example, and try to increment the count variable without synchronization. Assume count is 9, one thread reads the value and after this proccesor gives the execution to second thread. Now both threads reads same value i.e 9 and add one writes back to the count variable. In such we can see count value is 10 which should be 11.
+
+
+
+
+
+
